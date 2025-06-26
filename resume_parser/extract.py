@@ -1,3 +1,4 @@
+# ---- Python script for Resume Parsing ----
 import fitz # PyMuPDF: helps with PDF parsing
 import os # for file path operations
 import json # for JSON operations
