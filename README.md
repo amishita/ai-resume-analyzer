@@ -15,6 +15,12 @@ This project uses NLP to analyze resumes, calculate ATS scores, and recommend jo
 - `backend/`: FastAPI services (coming soon)
 
 ## Status
-🔄 Week 1 complete – Resume parsing script
+Week 1 complete – Resume parsing script
+- A Python script that:
+    -> Accepts PDF file
+    -> Extracts clean raw text
+    -> Identifies key sections
+    -> Grabs email/phone
+
 
 ## Created by Ishita Tanwar and Isha Aggarwal
