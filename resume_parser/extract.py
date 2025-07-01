@@ -3,6 +3,7 @@ import fitz # PyMuPDF: helps with PDF parsing
 import os # for file path operations
 import json # for JSON operations
 import re # regex: helps with finding patterns in text
+import json
 
 # Set the path to the PDF file we're testing with
 # This assumes the script is in a subdirectory of the project root
@@ -38,3 +39,32 @@ email, phone = extract_contact_info(text)  # Extract email and phone number
 print(text)
 print("Email:", email)
 print("Phone:", phone)
+
+def extract_sections(text):
+    section_titles = ['summary', 'objective', 'skills', 'experience', 'education', 'projects', 'certifications']
+    sections = {} # dictionary to hold sections
+
+    lines = text.split('\n') # clean up text by splitting into lines
+    current_section = None # variable to track current section
+
+    for line in lines:
+        stripped = line.strip().lower() # convert line to lowercase and strip whitespace
+
+        if any(title in stripped for title in section_titles):
+            current_section = stripped  # set current section to the line if it matches a section title
+            sections[current_section] = []  # create a list in the dicitonary to store the lines that follow
+        elif current_section:
+            sections[current_section].append(line.strip()) # add the line to the current section if it exists
+            # keep adding lines until a new section is found
+
+    for key in sections:
+        sections[key] = ' '.join(sections[key]) # join the list of lines into a single string for each section
+
+    return sections  # return the dictionary of sections
+
+sections = extract_sections(text)  # Extract sections from the text
+print(sections)
+
+# Save the extracted sections to a JSON file
+with open("output.json", "w") as f:
+    json.dump(sections, f, indent=4)
