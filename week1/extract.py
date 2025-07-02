@@ -3,12 +3,11 @@ import fitz # PyMuPDF: helps with PDF parsing
 import os # for file path operations
 import json # for JSON operations
 import re # regex: helps with finding patterns in text
-import json
 
 # Set the path to the PDF file we're testing with
 # This assumes the script is in a subdirectory of the project root
 base_dir = os.path.dirname(os.path.abspath(__file__))
-pdf_path = os.path.join(base_dir, "..", "sample_resumes", 'C1061.pdf')
+pdf_path = os.path.join(base_dir, "..", "sample_resumes", 'C1080.pdf')
 
 # Debugging lines to check the file path and existence
 '''
@@ -65,6 +64,10 @@ def extract_sections(text):
 sections = extract_sections(text)  # Extract sections from the text
 print(sections)
 
+# Get current file's directory (week1/)
+current_dir = os.path.dirname(os.path.abspath(__file__))
+output_path = os.path.join(current_dir, "output.json")
+
 # Save the extracted sections to a JSON file
-with open("output.json", "w") as f:
+with open(output_path, "w") as f:
     json.dump(sections, f, indent=4)

@@ -23,4 +23,4 @@ Week 1 complete – Resume parsing script
     -> Grabs email/phone
 
 
-## Created by Ishita Tanwar and Isha Aggarwal
+## Created by Ishita Tanwar
