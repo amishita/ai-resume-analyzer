@@ -40,21 +40,19 @@ print("Email:", email)
 print("Phone:", phone)
 
 def extract_sections(text):
-    section_titles = ['summary', 'objective', 'skills', 'experience', 'education', 'projects', 'certifications']
+    section_titles = ['summary', 'objective', 'skills', 'experience', 'education', 'projects', 'certifications', 'tech stack', 'achievements', 'work experience'] # list of section titles to look for
     sections = {} # dictionary to hold sections
 
     lines = text.split('\n') # clean up text by splitting into lines
     current_section = None # variable to track current section
 
     for line in lines:
-        stripped = line.strip().lower() # convert line to lowercase and strip whitespace
-
-        if any(title in stripped for title in section_titles):
-            current_section = stripped  # set current section to the line if it matches a section title
-            sections[current_section] = []  # create a list in the dicitonary to store the lines that follow
+        stripped = line.strip().lower()
+        if stripped in section_titles:
+            current_section = stripped
+            sections[current_section] = []
         elif current_section:
-            sections[current_section].append(line.strip()) # add the line to the current section if it exists
-            # keep adding lines until a new section is found
+            sections[current_section].append(line.strip())
 
     for key in sections:
         sections[key] = ' '.join(sections[key]) # join the list of lines into a single string for each section
@@ -64,9 +62,9 @@ def extract_sections(text):
 sections = extract_sections(text)  # Extract sections from the text
 print(sections)
 
-# Get current file's directory (week1/)
+# Get current file's directory
 current_dir = os.path.dirname(os.path.abspath(__file__))
-output_path = os.path.join(current_dir, "output.json")
+output_path = os.path.join(current_dir, "text_output.json")
 
 # Save the extracted sections to a JSON file
 with open(output_path, "w") as f:
