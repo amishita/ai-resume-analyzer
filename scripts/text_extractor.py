@@ -55,7 +55,12 @@ def extract_sections(text):
             sections[current_section].append(line.strip())
 
     for key in sections:
-        sections[key] = ' '.join(sections[key]) # join the list of lines into a single string for each section
+        cleaned_lines = [line for line in sections[key] if line.strip()]
+        sections[key] = cleaned_lines
+
+        if key == "tech stack" and cleaned_lines:
+            tech_lines = cleaned_lines[0].split(',')  # split tech stack by commas
+            sections[key] = [tech.strip() for tech in tech_lines if tech.strip()]
 
     return sections  # return the dictionary of sections
 
